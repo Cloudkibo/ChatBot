@@ -63,7 +63,7 @@ module.exports = function (app) {
                 res.status(response.body.status.code).json({status: 'success', body: responseMessage});
               });
             } else {
-              if(!result.action) {
+              if(result.speech) {
                 res.status(response.body.status.code).json({status: 'success', body: result.speech});
               } else {
                 res.status(response.body.status.code).json({status: 'success', body: response.body.result});
