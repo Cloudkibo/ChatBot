@@ -12,6 +12,7 @@ module.exports = function (app) {
       var uid = Math.random().toString(36).substring(7);
       var unique_id = 'h' + uid + '' + today.getFullYear() + '' + (today.getMonth() + 1) + '' + today.getDate() + '' + today.getHours() + '' + today.getMinutes() + '' + today.getSeconds();
 
+      // todo body should also contain session id, it should come from client
       var query = [];
       query.push(req.body.query);
 
