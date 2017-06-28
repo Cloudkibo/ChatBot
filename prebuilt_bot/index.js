@@ -9,17 +9,23 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // todo : middleware to see if the request sender is authorised server or not. Use when we expose webhook
-// app.use('/sendVoipNotification', function(req, res, next){
-//   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-//   console.log(req.ip);
-//   console.log(ip);
-//   console.log('This is middleware');
-//   console.log(req.body)
-//   if(ip === '::ffff:162.243.215.177')
-//     next();
-//   else
-//     res.sendStatus(403);
-// });
+app.use('/query', function(req, res, next){
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});
 
 var routes = require('./routes/routes');
 routes(app);
